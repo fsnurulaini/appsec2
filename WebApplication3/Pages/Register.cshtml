@@ -1,0 +1,89 @@
+﻿@page
+@model AceJobAgency.Pages.RegisterModel
+@{
+}
+@*<script src='https://www.google.com/recaptcha/api.js?render=<6LdClFQkAAAAAJ7KjMjY3LdQfcj1kJEHseAXbF8f>'></script>*@
+
+<script>
+
+	document.querySelector("form").addEventListener("submit", function (event) {
+		var password = document.querySelector("#password");
+		if (!password.validity.valid) {
+			password.nextElementSibling.innerHTML = password.validationMessage;
+			event.preventDefault();
+		}
+	});
+</script>
+
+<div class="container mt-5">
+
+	<div class="row justify-content-center align-items-center">
+
+		<div class="col-sm-12 col-md-12 col-lg-4">
+			<h1 class="mb-3">Register </h1>
+
+			<form method="post" enctype="multipart/form-data">
+				<div asp-validation-summary="All" class="text-danger"></div>
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.FirstName">First Name</label>
+					<input type="Text" asp-for="RModel.FirstName" class="form-control" />
+					<span asp-validaton-for="RModel.FirstName" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.LastName">Last Name</label>
+					<input type="Text" asp-for="RModel.LastName" class="form-control" />
+					<span asp-validaton-for="RModel.LastName" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.Gender">Gender</label>
+					<select class="form-control" asp-for="RModel.Gender" required>
+						<option>Male</option>
+						<option>Female</option>
+						<option>Other</option>
+					</select>
+					<span asp-validaton-for="RModel.Gender" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.NRIC">NRIC</label>
+					<input type="Text" asp-for="RModel.NRIC" class="form-control" />
+					<span asp-validaton-for="RModel.NRIC" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.Email">Email Address</label>
+					<input type="Text" asp-for="RModel.Email" class="form-control" />
+					<span asp-validaton-for="RModel.Email" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.Password">Password</label>
+					<input type="password" asp-for="RModel.Password" class="form-control" id="password" required/>
+					<span asp-validaton-for="RModel.Password" class="text-danger"></span>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.ConfirmPassword">Confirm Password</label>
+					<input type="password" asp-for="RModel.ConfirmPassword" class="form-control" />
+					<span asp-validaton-for="RModel.ConfirmPassword" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.DateofBirth">Date of Birth</label>
+					<input type="date" asp-for="RModel.DateofBirth" class="form-control" />
+					<span asp-validaton-for="RModel.DateofBirth" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.Resume">Upload Resume Here:</label>
+					<input type="file" name="file" accept="application/pdf, application/docx" asp-for="Upload" class="form-control" />
+					<span asp-validaton-for="RModel.Resume" class="text-danger"></span>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" asp-for="RModel.WhoamI">Biography</label>
+					<input type="text" asp-for="RModel.WhoamI" class="form-control" />
+					<span asp-validaton-for="RModel.WhoamI" class="text-danger"></span>
+				</div>
+@*				<input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response" />*@
+				<div class="mb-3">
+					<button type="submit" class="btn btn-primary">Register</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
