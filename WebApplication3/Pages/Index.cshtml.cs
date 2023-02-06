@@ -1,33 +1,31 @@
-﻿using AceJobAgency.Services;
-using AceJobAgency.ViewModels;
+﻿using AceJobAgency.ViewModels;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using AceJobAgency.Model;
 
 namespace AceJobAgency.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly DatabaseServices databaseServices;
-        public IndexModel(DatabaseServices _databaseServices)
+        private readonly UserManager<AceJobUser> _userManager;
+        public IndexModel(UserManager<AceJobUser> userManager)
         {
-            databaseServices = _databaseServices;
+            _userManager = userManager;
         }
-        public List<Register> DetailList { get; set; } = new();
-
-        public ViewModels.Register Details { get; set; }
-
-        public IndexModel(ILogger<IndexModel> logger)
+        public async Task<string> GetCurrentUserId()
         {
-            _logger = logger;
+            AceJobUser usr = await GetCurrentUserAsync();
+            return usr?.Id;
         }
 
-        public void OnGet(AceJobUser aceJobUser)
+        private Task<AceJobUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
+        public void OnGet()
         {
-            var dataProtectionProvider = DataProtectionProvider.Create("EncryptData");
-            var protector = dataProtectionProvider.CreateProtector("SecretKey");
 
         }
     }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AceJobAgency.Migrations
 {
     /// <inheritdoc />
-    public partial class initialcreate : Migration
+    public partial class newMigrate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
